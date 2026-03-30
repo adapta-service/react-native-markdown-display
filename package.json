@@ -1,9 +1,17 @@
 {
-  "name": "@ronradtke/react-native-markdown-display",
+  "name": "@adapta-services/react-native-markdown-display",
   "version": "8.1.0",
   "description": "Markdown renderer for react-native, with CommonMark spec support + adds syntax extensions & sugar (URL autolinking, typographer), originally created by Mient-jan Stelling as react-native-markdown-renderer",
   "main": "src/index.js",
   "types": "src/index.d.ts",
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "format": "prettier -w src",
     "format-check": "prettier --check src",
@@ -12,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RonRadtke/react-native-markdown-display.git"
+    "url": "git+https://github.com/adapta-service/react-native-markdown-display.git"
   },
   "keywords": [
     "react",
@@ -25,9 +33,9 @@
   "author": "Michael Lohmann, Daniel Maslowski, Ron Radtke and maintainers of the original library",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/RonRadtke/react-native-markdown-display/issues"
+    "url": "https://github.com/adapta-service/react-native-markdown-display/issues"
   },
-  "homepage": "https://github.com/RonRadtke/react-native-markdown-display",
+  "homepage": "https://github.com/adapta-service/react-native-markdown-display",
   "dependencies": {
     "css-to-react-native": "^3.2.0",
     "markdown-it": "^13.0.1",

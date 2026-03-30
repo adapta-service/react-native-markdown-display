@@ -1,4 +1,4 @@
-# React Native Markdown Display [![npm version](https://badge.fury.io/js/@ronradtke%2Freact-native-markdown-display.svg)](https://badge.fury.io/js/@ronradtke%2Freact-native-markdown-display) [![Known Vulnerabilities](https://snyk.io/test/github/iamacup/react-native-markdown-display/badge.svg)](https://snyk.io/test/github/iamacup/react-native-markdown-display)
+# React Native Markdown Display [![npm version](https://badge.fury.io/js/@adapta-services%2Freact-native-markdown-display.svg)](https://badge.fury.io/js/@adapta-services%2Freact-native-markdown-display) [![Known Vulnerabilities](https://snyk.io/test/github/adapta-service/react-native-markdown-display/badge.svg)](https://snyk.io/test/github/adapta-service/react-native-markdown-display)
 
 It a 100% compatible CommonMark renderer, a react-native markdown renderer done right. This is __not__ a web-view markdown renderer but a renderer that uses native components for all its elements. These components can be overwritten and styled as needed.
 
@@ -10,12 +10,12 @@ This is intended to be a replacement for react-native-markdown-renderer, with a 
 
 #### Yarn
 ```npm
-yarn add @ronradtke/react-native-markdown-display
+yarn add @adapta-services/react-native-markdown-display
 ```
 
 #### NPM
 ```npm
-npm install -S @ronradtke/react-native-markdown-display
+npm install -S @adapta-services/react-native-markdown-display
 ```
 
 ### Get Started
@@ -24,7 +24,7 @@ npm install -S @ronradtke/react-native-markdown-display
 import React from 'react';
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 
-import Markdown from '@ronradtke/react-native-markdown-display';
+import Markdown from '@adapta-services/react-native-markdown-display';
 
 const copy = `# h1 Heading 8-)
 
