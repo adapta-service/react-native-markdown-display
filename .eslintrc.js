@@ -1,6 +1,10 @@
 module.exports = {
+  env: {
+    es2021: true,
+    browser: true,
+    node: true,
+  },
   extends: [
-    '@react-native-community',
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
@@ -23,6 +27,7 @@ module.exports = {
     react: {
       version: require('./package.json').peerDependencies.react,
     },
+    'import/core-modules': ['react', 'react-native'],
     'import/ignore': ['node_modules'],
   }
 };

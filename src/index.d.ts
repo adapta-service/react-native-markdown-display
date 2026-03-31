@@ -2,39 +2,41 @@
 import MarkdownIt from 'markdown-it';
 import Token from 'markdown-it/lib/token';
 import {ComponentType, ReactNode} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export function getUniqueID(): string;
 
 export function openUrl(url: string): void;
 
-export function hasParents(parents: any[], type: string): boolean;
+export function hasParents(parents: ASTNode[], type: string): boolean;
+
+export type MarkdownStyle = StyleSheet.NamedStyles<Record<string, unknown>>;
 
 export type RenderFunction = (
   node: ASTNode,
   children: ReactNode[],
   parentNodes: ASTNode[],
-  styles: any,
-  styleObj?: any,
+  styles: MarkdownStyle,
+  styleObj?: Record<string, unknown>,
   // must have this so that we can have fixed overrides with more arguments
-  ...args: any
+  ...args: unknown[]
 ) => ReactNode;
 
 export type RenderLinkFunction = (
   node: ASTNode,
   children: ReactNode[],
   parentNodes: ASTNode[],
-  styles: any,
-  onLinkPress?: (url: string) => boolean,
+  styles: MarkdownStyle,
+  onLinkPress?: (url: string) => boolean | void,
 ) => ReactNode;
 
 export type RenderImageFunction = (
   node: ASTNode,
   children: ReactNode[],
   parentNodes: ASTNode[],
-  styles: any,
+  styles: MarkdownStyle,
   allowedImageHandlers: string[],
-  defaultImageHandler: string,
+  defaultImageHandler: string | null,
 ) => ReactNode;
 
 export interface RenderRules {
@@ -48,38 +50,42 @@ export interface RenderRules {
 export const renderRules: RenderRules;
 
 export interface MarkdownParser {
-  parse: (value: string, options: any) => Token[];
+  parse: (value: string, options: Record<string, unknown>) => Token[];
 }
 
 export interface ASTNode {
   type: string;
   sourceType: string; // original source token name
   sourceInfo: string;
-  sourceMeta: any;
+  sourceMeta: unknown;
   key: string;
   content: string;
   markup: string;
   tokenIndex: number;
   index: number;
-  attributes: Record<string, any>;
+  attributes: Record<string, unknown>;
   children: ASTNode[];
 }
 
 export class AstRenderer {
-  constructor(renderRules: RenderRules, style?: any);
+  constructor(customRenderRules: RenderRules, style?: MarkdownStyle);
 
   getRenderFunction(type: string): RenderFunction;
 
-  renderNode(node: any, parentNodes: ReadonlyArray<any>): ReactNode;
+  renderNode(node: ASTNode, parentNodes: ReadonlyArray<ASTNode>): ReactNode;
 
-  render(nodes: ReadonlyArray<any>): View;
+  render(nodes: ReadonlyArray<ASTNode>): ReactNode;
 }
 
+export type RenderAstFunction = (nodes: ReadonlyArray<ASTNode>) => ReactNode;
+
+export type MarkdownSource = string | ReadonlyArray<ASTNode>;
+
 export function parser(
-  source: string,
-  renderer: (node: ASTNode) => View,
-  parser: MarkdownParser,
-): any;
+  source: MarkdownSource,
+  renderer: RenderAstFunction,
+  markdownParser: MarkdownParser,
+): ReactNode;
 
 export function stringToTokens(
   source: string,
@@ -90,13 +96,17 @@ export function tokensToAST(tokens: ReadonlyArray<Token>): ASTNode[];
 
 export interface MarkdownProps {
   rules?: RenderRules;
-  style?: StyleSheet.NamedStyles<any>;
-  renderer?: AstRenderer;
+  style?: MarkdownStyle;
+  renderer?: AstRenderer | RenderAstFunction;
   markdownit?: MarkdownIt;
   mergeStyle?: boolean;
   debugPrintTree?: boolean;
-  onLinkPress?: (url: string) => boolean;
-  children: string;
+  onLinkPress?: (url: string) => boolean | void;
+  allowedImageHandlers?: string[];
+  defaultImageHandler?: string | null;
+  maxTopLevelChildren?: number | null;
+  topLevelMaxExceededItem?: ReactNode;
+  children: MarkdownSource;
 }
 
 type MarkdownStatic = ComponentType<MarkdownProps>;

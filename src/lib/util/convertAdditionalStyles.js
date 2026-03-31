@@ -5,12 +5,10 @@ export default function convertAdditionalStyles(style) {
 
   const tuples = rules
     .map((rule) => {
-      let [key, value] = rule.split(':');
+      const [key, value] = rule.split(':');
 
       if (key && value) {
-        key = key.trim();
-        value = value.trim();
-        return [key, value];
+        return [key.trim(), value.trim()];
       } else {
         return null;
       }

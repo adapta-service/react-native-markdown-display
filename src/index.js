@@ -17,7 +17,7 @@ import MarkdownIt from 'markdown-it';
 import removeTextStyleProps from './lib/util/removeTextStyleProps';
 import {styles} from './lib/styles';
 import {stringToTokens} from './lib/util/stringToTokens';
-import FitImage from 'react-native-fit-image';
+import FitImage from './lib/FitImage';
 import textStyleProps from './lib/data/textStyleProps';
 
 export {
@@ -104,7 +104,7 @@ const getRenderer = (
 
   // these checks are here to prevent extra overhead.
   if (renderer) {
-    if (!(typeof renderer === 'function') || renderer instanceof AstRenderer) {
+    if (typeof renderer === 'function' || renderer instanceof AstRenderer) {
       return renderer;
     } else {
       throw new Error(
@@ -154,7 +154,7 @@ const Markdown = React.memo(
     defaultImageHandler = 'https://',
     debugPrintTree = false,
   }) => {
-    const momoizedRenderer = useMemo(
+    const memoizedRenderer = useMemo(
       () =>
         getRenderer(
           textcomponent,
@@ -184,9 +184,9 @@ const Markdown = React.memo(
       ],
     );
 
-    const momoizedParser = useMemo(() => markdownit, [markdownit]);
+    const memoizedParser = useMemo(() => markdownit, [markdownit]);
 
-    return parser(children, momoizedRenderer.render, momoizedParser);
+    return parser(children, memoizedRenderer.render, memoizedParser);
   },
 );
 

@@ -1,9 +1,8 @@
 import {StyleSheet} from 'react-native';
 
-import getUniqueID from './util/getUniqueID';
-import convertAdditionalStyles from './util/convertAdditionalStyles';
-
 import textStyleProps from './data/textStyleProps';
+import convertAdditionalStyles from './util/convertAdditionalStyles';
+import getUniqueID from './util/getUniqueID';
 
 export default class AstRenderer {
   /**
@@ -63,7 +62,7 @@ export default class AstRenderer {
       let str = '';
 
       for (let a = 0; a < parents.length; a++) {
-        str = str + '-';
+        str = `${str}-`;
       }
 
       console.log(`${str}${node.type}`);
@@ -114,8 +113,7 @@ export default class AstRenderer {
         let refStyle = {};
 
         if (
-          parentNodes[a].attributes &&
-          parentNodes[a].attributes.style &&
+          parentNodes[a].attributes?.style &&
           typeof parentNodes[a].attributes.style === 'string'
         ) {
           refStyle = convertAdditionalStyles(parentNodes[a].attributes.style);

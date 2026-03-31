@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Pressable, View, Platform, StyleSheet} from 'react-native';
-import FitImage from 'react-native-fit-image';
+import FitImage from './FitImage';
 
 import openUrl from './util/openUrl';
 import hasParents from './util/hasParents';
@@ -9,7 +9,7 @@ import textStyleProps from './data/textStyleProps';
 
 const renderRules = (Text) => ({
   // when unknown elements are introduced, so it wont break
-  unknown: (node, children, parent, styles) => null,
+  unknown: () => null,
 
   // The main container
   body: (node, children, parent, styles) => (
@@ -263,18 +263,20 @@ const renderRules = (Text) => ({
   ) => {
     const {src, alt} = node.attributes;
 
+    if (typeof src !== 'string' || src.length === 0) {
+      return null;
+    }
+
     // we check that the source starts with at least one of the elements in allowedImageHandlers
-    const show =
-      allowedImageHandlers.filter((value) => {
-        return src.toLowerCase().startsWith(value.toLowerCase());
-      }).length > 0;
+    const show = allowedImageHandlers.some((value) => {
+      return src.toLowerCase().startsWith(value.toLowerCase());
+    });
 
     if (show === false && defaultImageHandler === null) {
       return null;
     }
 
     const imageProps = {
-      indicator: true,
       key: node.key,
       style: styles._VIEW_SAFE_image,
       source: {

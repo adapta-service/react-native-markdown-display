@@ -1,4 +1,4 @@
-let uuid = new Date().getTime();
+let uuid = Date.now();
 
 export default function getUniqueID() {
   uuid++;
