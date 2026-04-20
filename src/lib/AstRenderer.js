@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-import textStyleProps from './data/textStyleProps';
+import {textStylePropsSet} from './data/textStyleProps';
 import convertAdditionalStyles from './util/convertAdditionalStyles';
 import getUniqueID from './util/getUniqueID';
 
@@ -147,7 +147,7 @@ export default class AstRenderer {
         const arr = Object.keys(refStyle);
 
         for (let b = 0; b < arr.length; b++) {
-          if (textStyleProps.includes(arr[b])) {
+          if (textStylePropsSet.has(arr[b])) {
             styleObj[arr[b]] = refStyle[arr[b]];
           }
         }

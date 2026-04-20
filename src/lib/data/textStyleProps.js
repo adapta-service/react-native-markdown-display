@@ -1,4 +1,4 @@
-export default [
+const textStyleProps = [
   'textShadowOffset',
   'color',
   'fontSize',
@@ -19,3 +19,6 @@ export default [
   'textTransform',
   'writingDirection',
 ];
+
+export const textStylePropsSet = new Set(textStyleProps);
+export default textStyleProps;

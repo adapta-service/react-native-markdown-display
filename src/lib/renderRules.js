@@ -5,7 +5,7 @@ import FitImage from './FitImage';
 import openUrl from './util/openUrl';
 import hasParents from './util/hasParents';
 
-import textStyleProps from './data/textStyleProps';
+import {textStylePropsSet} from './data/textStyleProps';
 
 const renderRules = (Text) => ({
   // when unknown elements are introduced, so it wont break
@@ -104,7 +104,7 @@ const renderRules = (Text) => ({
     const modifiedInheritedStylesObj = {};
 
     for (let b = 0; b < arr.length; b++) {
-      if (textStyleProps.includes(arr[b])) {
+      if (textStylePropsSet.has(arr[b])) {
         modifiedInheritedStylesObj[arr[b]] = refStyle[arr[b]];
       }
     }
