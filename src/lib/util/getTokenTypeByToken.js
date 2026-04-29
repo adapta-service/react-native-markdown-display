@@ -32,7 +32,7 @@ export default function getTokenTypeByToken(token) {
 
   switch (cleanedType) {
     case 'heading': {
-      cleanedType = `${cleanedType}${token.tag.substr(1)}`;
+      cleanedType = `${cleanedType}${token.tag.substring(1)}`;
       break;
     }
     default: {
