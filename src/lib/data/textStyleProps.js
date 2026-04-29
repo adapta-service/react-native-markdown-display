@@ -21,6 +21,7 @@ const textStyleProps = [
 ];
 
 export const textStylePropsSet = new Set(textStyleProps);
+<<<<<<< perf-optimize-text-style-lookups-11542932240715756341
 
 const syncTextStylePropsSet = () => {
   textStylePropsSet.clear();
@@ -56,4 +57,6 @@ for (const methodName of mutatingMethods) {
     },
   });
 }
+=======
+>>>>>>> master
 export default textStyleProps;
