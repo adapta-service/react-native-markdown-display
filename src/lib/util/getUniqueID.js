@@ -3,10 +3,16 @@
  *
  * @return {string}
  */
+// Module-level counter ensures in-process uniqueness. JavaScript is
+// single-threaded, so this increment is safe without atomic operations.
 let _counter = 0;
 
 export default function getUniqueID() {
-  const count = (++_counter).toString(16).padStart(4, '0');
+  // Reset before precision loss; 2^53 calls is effectively unreachable in practice.
+  if (_counter >= Number.MAX_SAFE_INTEGER) {
+    _counter = 0;
+  }
+  const count = (++_counter).toString(16);
   let randomPart;
 
   if (
