@@ -318,6 +318,22 @@ const renderRules = (Text) => ({
       {'\n'}
     </Text>
   ),
+  // Believe these are never used but retained for completeness
+  pre: (node, children, parent, styles) => (
+    <View key={node.key} style={styles._VIEW_SAFE_pre}>
+      {children}
+    </View>
+  ),
+  inline: (node, children, parent, styles) => (
+    <Text key={node.key} style={styles.inline}>
+      {children}
+    </Text>
+  ),
+  span: (node, children, parent, styles) => (
+    <Text key={node.key} style={styles.span}>
+      {children}
+    </Text>
+  ),
 });
 
 export default renderRules;

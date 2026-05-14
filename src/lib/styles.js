@@ -189,4 +189,9 @@ export const styles = {
     height: 1,
   },
   softbreak: {},
+
+  // Believe these are never used but retained for completeness
+  pre: {},
+  inline: {},
+  span: {},
 };
