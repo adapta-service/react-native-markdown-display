@@ -190,7 +190,7 @@ export const styles = {
   },
   softbreak: {},
 
-  // Believe these are never used but retained for completeness
+  // Retained for backwards compatibility and API completeness
   pre: {},
   inline: {},
   span: {},

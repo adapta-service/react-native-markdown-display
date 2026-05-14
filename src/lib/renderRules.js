@@ -318,7 +318,7 @@ const renderRules = (Text) => ({
       {'\n'}
     </Text>
   ),
-  // Believe these are never used but retained for completeness
+  // Retained for backwards compatibility and API completeness
   pre: (node, children, parent, styles) => (
     <View key={node.key} style={styles._VIEW_SAFE_pre}>
       {children}
