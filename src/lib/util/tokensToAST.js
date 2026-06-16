@@ -14,10 +14,9 @@ function createNode(token, tokenIndex) {
   let attributes = {};
 
   if (token.attrs) {
-    attributes = token.attrs.reduce((prev, curr) => {
-      const [name, value] = curr;
-      return {...prev, [name]: value};
-    }, {});
+    for (let i = 0; i < token.attrs.length; i++) {
+      attributes[token.attrs[i][0]] = token.attrs[i][1];
+    }
   }
 
   return {
