@@ -43,36 +43,45 @@ const getStyle = (mergeStyle, style) => {
 
   if (mergeStyle === true && style !== null) {
     // make sure we get anything user defuned
-    Object.keys(style).forEach((value) => {
-      useStyles[value] = {
-        ...StyleSheet.flatten(style[value]),
-      };
-    });
+    for (const value in style) {
+      if (Object.prototype.hasOwnProperty.call(style, value)) {
+        useStyles[value] = {
+          ...StyleSheet.flatten(style[value]),
+        };
+      }
+    }
 
     // combine any existing styles
-    Object.keys(styles).forEach((value) => {
-      useStyles[value] = {
-        ...styles[value],
-        ...StyleSheet.flatten(style[value]),
-      };
-    });
+    for (const value in styles) {
+      if (Object.prototype.hasOwnProperty.call(styles, value)) {
+        useStyles[value] = {
+          ...styles[value],
+          ...StyleSheet.flatten(style[value]),
+        };
+      }
+    }
   } else {
     useStyles = {
       ...styles,
     };
 
     if (style !== null) {
-      Object.keys(style).forEach((value) => {
-        useStyles[value] = {
-          ...StyleSheet.flatten(style[value]),
-        };
-      });
+      for (const value in style) {
+        if (Object.prototype.hasOwnProperty.call(style, value)) {
+          useStyles[value] = {
+            ...StyleSheet.flatten(style[value]),
+          };
+        }
+      }
     }
   }
 
-  Object.keys(useStyles).forEach((value) => {
+  const keys = Object.keys(useStyles);
+  const length = keys.length;
+  for (let i = 0; i < length; ++i) {
+    const value = keys[i];
     useStyles['_VIEW_SAFE_' + value] = removeTextStyleProps(useStyles[value]);
-  });
+  }
 
   return StyleSheet.create(useStyles);
 };
