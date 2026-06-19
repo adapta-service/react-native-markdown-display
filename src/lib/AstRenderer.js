@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 
 import {textStylePropsSet} from './data/textStyleProps';
+import logger from './util/logger.js';
 import convertAdditionalStyles from './util/convertAdditionalStyles';
 import getUniqueID from './util/getUniqueID';
 
@@ -30,6 +31,16 @@ export default class AstRenderer {
     this._debugPrintTree = debugPrintTree;
   }
 
+  _log = (...args) => {
+    if (this._debugPrintTree === true) {
+      logger.log(...args);
+    }
+  };
+
+  _warn = (...args) => {
+    logger.warn(...args);
+  };
+
   /**
    *
    * @param {string} type
@@ -39,7 +50,7 @@ export default class AstRenderer {
     const renderFunction = this._renderRules[type];
 
     if (!renderFunction) {
-      console.warn(
+      this._warn(
         `Warning, unknown render rule encountered: ${type}. 'unknown' render rule used (by default, returns null - nothing rendered)`,
       );
       return this._renderRules.unknown;
@@ -58,9 +69,7 @@ export default class AstRenderer {
     const renderFunction = this.getRenderFunction(node.type);
     const parents = [...parentNodes];
 
-    if (this._debugPrintTree === true) {
-      console.log(`${'-'.repeat(parents.length)}${node.type}`);
-    }
+    this._log(`${'-'.repeat(parents.length)}${node.type}`);
 
     parents.unshift(node);
 

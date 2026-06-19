@@ -10,6 +10,7 @@ import parser from './lib/parser';
 import getUniqueID from './lib/util/getUniqueID';
 import hasParents from './lib/util/hasParents';
 import openUrl from './lib/util/openUrl';
+import logger from './lib/util/logger.js';
 import tokensToAST from './lib/util/tokensToAST';
 import renderRules from './lib/renderRules';
 import AstRenderer from './lib/AstRenderer';
@@ -91,13 +92,13 @@ const getRenderer = (
   debugPrintTree,
 ) => {
   if (renderer && rules) {
-    console.warn(
+    logger.warn(
       'react-native-markdown-display you are using renderer and rules at the same time. This is not possible, props.rules is ignored',
     );
   }
 
   if (renderer && style) {
-    console.warn(
+    logger.warn(
       'react-native-markdown-display you are using renderer and style at the same time. This is not possible, props.style is ignored',
     );
   }
